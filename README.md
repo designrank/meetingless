@@ -1,6 +1,8 @@
 # meetingless
 
 ## Project setup
+
+(yarn can be replaced with npm with more or less same commands)
 ```
 yarn install
 ```
