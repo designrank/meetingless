@@ -36,9 +36,32 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import {Component, Watch, Vue} from "vue-property-decorator";
 import SolidLayout from "../components/SolidLayout.vue";
 import InlineDropdown from "@/components/InlineDropdown.vue";
+
+type ItemState = "meeting" | "no-meeting" | "next"
+
+type ChosenState = "yes" | "no" | undefined
+
+class QuestItem {
+  description: string
+  yesAction: ItemState
+  noAction: ItemState
+  chosen: ChosenState
+
+  constructor(description: string, yesAction: ItemState, noAction: ItemState) {
+    this.description = description;
+    this.yesAction = yesAction;
+    this.noAction = noAction;
+    this.chosen = undefined
+  }
+}
+
+interface UrlParams {
+  n: string;
+  a: QuestItem[];
+}
 
 @Component({
   components: {InlineDropdown, SolidLayout}
@@ -46,7 +69,7 @@ import InlineDropdown from "@/components/InlineDropdown.vue";
 export default class Decision extends Vue {
   private started = false
 
-  private stages = []
+  private stages: QuestItem[] = []
 
   private newMeetingName = ""
 
@@ -54,6 +77,38 @@ export default class Decision extends Vue {
 
   public get meetingNameWrapper() {
     return this.meetingName ? `meeting "${this.meetingName}"` : "upcoming meeting"
+  }
+
+  @Watch('meetingName')
+  meetingNameChange() {
+    this.setUrlParams()
+  }
+
+  mounted() {
+    const params = this.$route.query.params
+
+    if (!params) return
+
+    this.readUrlParams(params.toString())
+  }
+
+  public readUrlParams(params: string) {
+    const dataObject: UrlParams = JSON.parse(atob(params))
+
+    this.meetingName = dataObject.n
+    this.stages = dataObject.a
+  }
+
+  public setUrlParams() {
+    const dataObject: UrlParams = {
+      n: this.meetingName,
+      a: this.stages
+    }
+
+    const dataLine = btoa(JSON.stringify(dataObject))
+    const newUrl = this.$route.path + '?params=' + dataLine
+
+    this.$router.push(newUrl)
   }
 
   public nameEdit() {

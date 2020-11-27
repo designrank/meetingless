@@ -1,5 +1,5 @@
 <template>
-    <section class="whole-page row">
+    <section class="whole-page row" v-on:click="$emit('globalclick', $event.target)">
         <section class="col-7 dark-side">
           <slot name="dark-side"></slot>
         </section>

@@ -6,8 +6,8 @@
               :title="title"
               @click="toggleDropdown"
           >{{caption}}</span>
-              <div :class="['dropdown-menu', 'form-row', showEdit ? 'show' : '']" id="meetingNameEdit">
-                <div class="dropdown-item col p-2">
+              <div :class="['dropdown-menu', showEdit ? 'show' : '']">
+                <div class="dropdown-item p-2">
                   <slot/>
                 </div>
               </div>
@@ -18,7 +18,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class InlineDropdown extends Vue {
-  @Prop({default: ""})
+  @Prop({default: "click to change"})
   private title!: string
 
   @Prop({required: true})
@@ -31,3 +31,9 @@ export default class InlineDropdown extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.dropdown-menu {
+  width: max-content;
+}
+</style>

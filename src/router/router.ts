@@ -9,16 +9,13 @@ Vue.use(VueRouter)
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'Landing',
     component: Landing
   },
   {
     path: '/business-impact',
-    name: 'Business Impact',
     component: BusinessImpact
   },{
-    path: '/decision',
-    name: 'Decision',
+    path: '/decision/:params?',
     component: Decision
   },
 ]
