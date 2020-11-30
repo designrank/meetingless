@@ -1,6 +1,6 @@
 <template>
   <main id="app" class="container-fluid p-0">
-    <router-view/>
+    <router-view :key="$route.path"/>
   </main>
 </template>
 

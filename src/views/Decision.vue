@@ -1,5 +1,5 @@
 <template>
-  <SolidLayout>
+  <SolidLayout :key="$route.fullPath">
     <template slot="main-side">
       <!--  Beginning of the questionnaire    -->
       <article v-if="questionProgress.length === 0" class="beginning">
@@ -35,7 +35,9 @@
           v-else-if="latestQuestion.status === questionAction.NONE || latestQuestion.status === questionAction.NO_MEETING">
         <nav class="back-navigation">
           <a href="#" v-on:click.prevent="stepBack()">
-            <img src="@/assets/left-arrow.svg" alt="Go to previous question">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+            </svg>
           </a>
         </nav>
         <section>
@@ -45,7 +47,10 @@
           <button
               v-if="latestQuestion.question.yesAction !== questionAction.NONE"
               type="button"
-              class="btn btn-outline-light px-2 m-3"
+              :class="[
+                'btn', 'px-4', 'm-2',
+                noMeetingSelected(latestQuestion.question.yesAction) ? 'btn-light' : 'btn-outline-light'
+              ]"
               @click="() => actionClick(latestQuestion.question.yesAction)"
           >
             Yes
@@ -53,7 +58,10 @@
           <button
               v-if="latestQuestion.question.noAction !== questionAction.NONE"
               type="button"
-              class="btn btn-outline-light px-2 m-2"
+              :class="[
+                'btn', 'px-4', 'm-2',
+                noMeetingSelected(latestQuestion.question.noAction) ? 'btn-light' : 'btn-outline-light'
+              ]"
               @click="() => actionClick(latestQuestion.question.noAction)"
           >
             No
@@ -118,8 +126,6 @@ export default class Decision extends Vue {
 
   private meetingName = ""
 
-  private init = true // this is to prevent replacing URL while page just being loaded
-
   public get meetingNameWrapper() {
     return this.meetingName ? `meeting "${this.meetingName}"` : "upcoming meeting"
   }
@@ -134,22 +140,18 @@ export default class Decision extends Vue {
 
   @Watch('meetingName')
   meetingNameChange() {
-    if (this.init) return // do not set params if page is just being created - they're there already
     this.setUrlParams()
   }
 
   @Watch('questionProgress')
   questionProgressChange() {
-    if (this.init) return // do not set params if page is just being created - they're there already
     this.setUrlParams()
   }
 
   mounted() {
-    const params = this.$route.query.params
+    const params = this.$route.params.settings
 
     if (params) this.readUrlParams(params.toString())
-
-    this.init = false
   }
 
   public readUrlParams(params: string) {
@@ -166,8 +168,12 @@ export default class Decision extends Vue {
     }
 
     const dataLine = btoa(JSON.stringify(dataObject))
-    const newUrl = this.$route.path + '?params=' + dataLine
+    if (this.$route.params.settings && this.$route.params.settings === dataLine) {
+      // it's the same route, no need to update
+      return
+    }
 
+    const newUrl = '/decision/' + dataLine
     this.$router.push(newUrl)
   }
 
@@ -188,6 +194,7 @@ export default class Decision extends Vue {
   }
 
   private setQuestionProgressStatus(status: QuestionAction) {
+    if (this.questionProgress.length === 0) return
     const lastQuestionStatus = this.questionProgress[this.questionProgress.length - 1]
     lastQuestionStatus[1] = status
     this.questionProgress.splice(this.questionProgress.length - 1, 1, lastQuestionStatus)
@@ -196,7 +203,7 @@ export default class Decision extends Vue {
   public actionClick(action: QuestionAction) {
     const question = this.latestQuestion.question
     const questionNext = question.nextAction
-    
+
     if (action === QuestionAction.NEXT && !questionNext) {
       // it's a meeting!
       this.setQuestionProgressStatus(QuestionAction.MEETING)
@@ -225,6 +232,10 @@ export default class Decision extends Vue {
     }
   }
 
+  public noMeetingSelected(action: QuestionAction) {
+    return this.latestQuestion.status === QuestionAction.NO_MEETING && action === QuestionAction.NO_MEETING
+  }
+
 }
 </script>
 
@@ -234,4 +245,10 @@ export default class Decision extends Vue {
   margin-top: 3rem;
 }
 
+.back-navigation a {
+  display: block;
+  color: white;
+  font-size: 2rem;
+  margin: -2rem 2rem 2rem -2rem;
+}
 </style>

@@ -15,7 +15,7 @@ const routes: Array<RouteConfig> = [
     path: '/business-impact',
     component: BusinessImpact
   },{
-    path: '/decision/:params?',
+    path: '/decision/:settings?',
     component: Decision
   },
 ]
