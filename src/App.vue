@@ -5,8 +5,10 @@
 </template>
 
 <style lang="scss">
+
 #app {
   font-family: 'Open Sans', sans-serif  !important;
+  font-size: 1.3rem;
 }
 
 h1, h2, h3, h4, h5, h6 {

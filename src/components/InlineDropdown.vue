@@ -1,17 +1,24 @@
 <template>
-  <span class="dropdown d-inline">
-          <span
+<!--  <b-dropdown :id="'dropdown-' + rand" variant='link' :text="caption" class="d-inline" :title="title" v-b-tooltip.hover v-b-tooltip.top v-b-toggle.meetingNameEdit toggle-class="text-decoration-none" no-caret>-->
+<!--    <b-dropdown-item class="p-2 adjustable">-->
+<!--      <slot/>-->
+<!--    </b-dropdown-item>-->
+<!--  </b-dropdown>-->
+
+  <div class="dropdown d-inline" v-click-outside="hideDropdown">
+          <a
+              target="#"
               class="adjustable name-selection"
               v-b-tooltip.hover v-b-tooltip.top v-b-toggle.meetingNameEdit
               :title="title"
-              @click="toggleDropdown"
-          >{{caption}}</span>
+              v-on:click.prevent="toggleDropdown"
+          >{{caption}}</a>
               <div :class="['dropdown-menu', showEdit ? 'show' : '']">
                 <div class="dropdown-item p-2">
                   <slot/>
                 </div>
               </div>
-            </span>
+            </div>
 </template>
 
 <script lang="ts">
@@ -26,8 +33,14 @@ export default class InlineDropdown extends Vue {
 
   private showEdit = false
 
+  private rand = Math.floor(Math.random()*1000)
+
   public toggleDropdown() {
     this.showEdit = !this.showEdit
+  }
+
+  public hideDropdown() {
+    this.showEdit = false
   }
 }
 </script>
@@ -35,5 +48,18 @@ export default class InlineDropdown extends Vue {
 <style lang="scss" scoped>
 .dropdown-menu {
   width: max-content;
+}
+
+.adjustable {
+  text-decoration: underline dashed;
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+}
+
+a:hover {
+  color: lightgrey;
 }
 </style>

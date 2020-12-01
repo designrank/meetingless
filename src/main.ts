@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router/router'
 import store from './store'
 
+import vClickOutside from 'v-click-outside'
+Vue.use(vClickOutside)
+
 Vue.config.productionTip = false
 
 import { BootstrapVue } from 'bootstrap-vue'

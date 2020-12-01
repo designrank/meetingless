@@ -42,12 +42,13 @@
             </InlineDropdown>
             participants
           </p>
-          <p>
-            Costs
-          </p>
           <h3>
-            {{ salaryCurrency }}{{ meetingCost }}/month
+            Costs
           </h3>
+          <h2>
+            {{ salaryCurrency }}{{ meetingCost }}/month
+          </h2>
+
         </section>
       </article>
     </template>
