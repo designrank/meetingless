@@ -46,7 +46,7 @@
             with
             <InlineDropdown :caption="meetingParticipants">
               <label for="participants-number-selection" class="sr-only">Participants number</label>
-              <input id="participants-number-selection" type="number" class="mx-1 form-control col" v-model="meetingParticipants" min="1" max="1000"/>
+              <input id="participants-number-selection" type="number" class="mx-1 form-control col" v-model="meetingParticipants" min="2"/>
             </InlineDropdown>
             participants
           </p>
@@ -63,6 +63,9 @@
             </p>
           </section>
         </section>
+        <footer class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary" @click="$router.push('/')">Return to main page</button>
+        </footer>
       </article>
     </template>
     <template slot="bright-side">
@@ -92,10 +95,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import {Component, Watch, Vue} from "vue-property-decorator";
 import SplitLayout from "../components/SplitLayout.vue";
 import InlineDropdown from "@/components/InlineDropdown.vue";
 import GTDTools from "@/components/GTDTools.vue";
+import BackNavigation from "@/components/BackNavigation.vue";
 
 enum SalaryPeriod {
   HOUR = "hour",
@@ -122,8 +126,17 @@ enum MeetingFrequency {
   WEEKLY = "weekly"
 }
 
+interface UrlParams {
+  c: SupportedCurrency;
+  a: number;
+  p: SalaryPeriod;
+  f: MeetingFrequency;
+  h: number;
+  n: number;
+}
+
 @Component({
-  components: {InlineDropdown, SplitLayout, GTDTools}
+  components: {InlineDropdown, SplitLayout, GTDTools, BackNavigation}
 })
 export default class BusinessImpact extends Vue {
   private readonly Currencies = SupportedCurrency
@@ -141,6 +154,23 @@ export default class BusinessImpact extends Vue {
   meetingHours = 1
 
   meetingParticipants = 6
+
+  @Watch('salaryCurrency')
+  @Watch('salaryAmount')
+  @Watch('salaryPeriod')
+  @Watch('meetingFrequency')
+  @Watch('meetingHours')
+  @Watch('meetingParticipants')
+  paramsChange() {
+    this.setUrlParams()
+  }
+
+  mounted() {
+    const params = this.$route.query.settings
+
+    if (params) this.readUrlParams(params.toString())
+    else this.setUrlParams()
+  }
 
   public get meetingCost() {
     // calculations assume 8 hours a day, 5 days a week, 4 weeks a month, 12 month a year
@@ -162,8 +192,35 @@ export default class BusinessImpact extends Vue {
   }
 
   public get meetingLengthCaption() {
-    const hourLabel = this.meetingHours === 1 ? 'hour' : 'hours'
+    const hourLabel = this.meetingHours.toString() === '1' ? 'hour' : 'hours'
     return `${this.meetingHours} ${hourLabel}`
+  }
+
+  public readUrlParams(params: string) {
+    const dataObject: UrlParams = JSON.parse(decodeURIComponent(escape(atob(params))))
+
+    this.salaryCurrency = dataObject.c
+    this.salaryAmount = dataObject.a
+    this.salaryPeriod = dataObject.p
+    this.meetingFrequency = dataObject.f
+    this.meetingHours = dataObject.h
+    this.meetingParticipants = dataObject.n
+  }
+
+  public setUrlParams() {
+    const dataObject: UrlParams = {
+      c: this.salaryCurrency,
+      a: this.salaryAmount,
+      p: this.salaryPeriod,
+      f: this.meetingFrequency,
+      h: this.meetingHours,
+      n: this.meetingParticipants
+    }
+
+    const dataLine = btoa(unescape(encodeURIComponent(JSON.stringify(dataObject))))
+
+    const newUrl = '/business-impact/?settings=' + dataLine
+    this.$router.replace(newUrl)
   }
 }
 </script>
@@ -187,4 +244,5 @@ input[type="number"] {
   font-size: 0.8rem;
   color: lightgrey;
 }
+
 </style>

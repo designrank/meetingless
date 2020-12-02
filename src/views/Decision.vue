@@ -34,13 +34,7 @@
       <!--  Question card    -->
       <article
           v-else-if="latestQuestion.status === questionAction.NONE || latestQuestion.status === questionAction.NO_MEETING">
-        <nav class="back-navigation">
-          <a href="#" v-on:click.prevent="stepBack()">
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-            </svg>
-          </a>
-        </nav>
+        <BackNavigation @navigateBack="stepBack"/>
         <section>
           {{ latestQuestion.question.description }}
         </section>
@@ -100,6 +94,7 @@ import InlineDropdown from "@/components/InlineDropdown.vue";
 import {QuestionAction} from "@/models/QuestionAction";
 import {QuestionLibrary} from "@/models/QuestionLibrary";
 import {Question} from "@/models/Question";
+import BackNavigation from "@/components/BackNavigation.vue";
 
 type QuestionTuple = [string, QuestionAction]
 
@@ -114,7 +109,7 @@ interface QuestionStatus {
 }
 
 @Component({
-  components: {InlineDropdown, SolidLayout}
+  components: {BackNavigation, InlineDropdown, SolidLayout}
 })
 export default class Decision extends Vue {
   public readonly questionAction = QuestionAction
@@ -156,7 +151,7 @@ export default class Decision extends Vue {
   }
 
   public readUrlParams(params: string) {
-    const dataObject: UrlParams = JSON.parse(atob(params))
+    const dataObject: UrlParams = JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(params)))))
 
     this.meetingName = dataObject.n
     this.questionProgress = dataObject.a
@@ -168,7 +163,7 @@ export default class Decision extends Vue {
       a: this.questionProgress
     }
 
-    const dataLine = btoa(JSON.stringify(dataObject))
+    const dataLine = encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(dataObject)))))
     if (this.$route.params.settings && this.$route.params.settings === dataLine) {
       // it's the same route, no need to update
       return
@@ -246,10 +241,4 @@ export default class Decision extends Vue {
   margin-top: 3rem;
 }
 
-.back-navigation a {
-  display: block;
-  color: white;
-  font-size: 2rem;
-  margin: -2rem 2rem 2rem -2rem;
-}
 </style>
