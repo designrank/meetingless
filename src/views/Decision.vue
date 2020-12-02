@@ -74,7 +74,7 @@
       <!--  Final decision: meeting! (new card)    -->
       <article v-else>
         <header>
-          <h3>Your meeting sounds great!</h3>
+          <h3>Your <span v-if="meetingName">"{{ meetingName }}"</span> meeting sounds great!</h3>
         </header>
         <section>
           {{ latestQuestion.question.meetingOutcome }}
