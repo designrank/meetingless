@@ -14,7 +14,7 @@
               v-on:click.prevent="toggleDropdown"
           >{{caption}}</a>
               <div :class="['dropdown-menu', showEdit ? 'show' : '']">
-                <div class="dropdown-item p-2">
+                <div class="dropdown-item py-2 px-3">
                   <slot/>
                 </div>
               </div>
@@ -51,7 +51,7 @@ export default class InlineDropdown extends Vue {
 }
 
 .adjustable {
-  text-decoration: underline dashed;
+  text-decoration: underline dotted;
 }
 
 a {

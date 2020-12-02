@@ -11,7 +11,8 @@
                 title="Want to give it a name? Click it!"
                 :caption="meetingNameWrapper"
             >
-              <input v-model="newMeetingName" class="form-control mb-2" type="text"
+              <label for="meeting-name-input" class="sr-only">Meeting name</label>
+              <input id="meeting-name-input" v-model="newMeetingName" class="form-control mb-2" type="text"
                      :placeholder="meetingName || 'enter new name'"/>
               <button class="form-control btn btn-secondary" type="button" @click="nameEdit">
                 Change

@@ -7,48 +7,61 @@
             With
             <InlineDropdown :caption="salaryCaption">
               <div class="form-row">
-                <select class="mx-1 form-control col" v-model="salaryCurrency">
+                <label for="salary-currency-selection" class="sr-only">Salary currency</label>
+                <select  id="salary-currency-selection" class="mx-1 form-control col" v-model="salaryCurrency">
                   <option v-for="(symbol, code) in Currencies" :key="code" :value="symbol">
                     {{ code }} - {{ symbol }}
                   </option>
                 </select>
-                <input class="mx-1 form-control col" type="number" v-model="salaryAmount"/>
-                <select class="mx-1 form-control col" v-model="salaryPeriod">
+                <label for="salary-amount-selection" class="sr-only">Salary amount</label>
+                <input id="salary-amount-selection" class="mx-1 form-control col" type="number" v-model="salaryAmount" min="0"/>
+                <label for="salary-period-selection" class="sr-only">Salary period</label>
+                <select id="salary-period-selection" class="mx-1 form-control col" v-model="salaryPeriod">
                   <option v-for="(period, index) in SalaryPeriods" :key="index" :value="period">{{ period }}</option>
                 </select>
               </div>
             </InlineDropdown>
-            salary
+            Net salary
           </p>
           <p>
             A
             <InlineDropdown :caption="meetingFrequency">
-                <select class="mx-1 form-control" v-model="meetingFrequency">
-                  <option v-for="(frequency, code) in MeetingFrequency" :key="code" :value="frequency">
-                    {{ frequency }}
-                  </option>
-                </select>
+              <label for="meeting-frequency-selection" class="sr-only">Meeting frequency</label>
+              <select  id="meeting-frequency-selection" class="mx-1 form-control" v-model="meetingFrequency">
+                <option v-for="(frequency, code) in MeetingFrequency" :key="code" :value="frequency">
+                  {{ frequency }}
+                </option>
+              </select>
             </InlineDropdown>
             meeting of
             <InlineDropdown :caption="meetingLengthCaption">
-              <div class="form-row">
-                <input id="hours-adjustment" type="number" class="mx-1 form-control col" v-model="meetingHours"/>
-                <label for="hours-adjustment"> hours</label>
+              <div class="input-group">
+                <input id="hours-adjustment" type="number" class="single-control form-control" v-model="meetingHours"
+                       min="1" max="24"/>
+                <div class="input-group-append">
+                  <label for="hours-adjustment" class="input-group-text">hours</label>
+                </div>
               </div>
             </InlineDropdown>
             with
             <InlineDropdown :caption="meetingParticipants">
-                <input type="number" class="mx-1 form-control col" v-model="meetingParticipants"/>
+              <label for="participants-number-selection" class="sr-only">Participants number</label>
+              <input id="participants-number-selection" type="number" class="mx-1 form-control col" v-model="meetingParticipants" min="1" max="1000"/>
             </InlineDropdown>
             participants
           </p>
-          <h3>
-            Costs
-          </h3>
-          <h2>
-            {{ salaryCurrency }}{{ meetingCost }}/month
-          </h2>
 
+          <h3>
+            Costs<sup class="asterisk">*</sup>
+          </h3>
+          <h1>
+            {{ salaryCurrency }}{{ meetingCost }}/month
+          </h1>
+          <section class="cost-breakdown mt-5 pt-3">
+            <p>
+              <sup class="asterisk">*</sup> Cost assumption is made based on average of 8 working hours a day, 5 workdays a week, 4 weeks a month and 12 month a year.
+            </p>
+          </section>
         </section>
       </article>
     </template>
@@ -85,6 +98,8 @@ import InlineDropdown from "@/components/InlineDropdown.vue";
 import GTDTools from "@/components/GTDTools.vue";
 
 enum SalaryPeriod {
+  HOUR = "hour",
+  DAY = "day",
   WEEK = "week",
   MONTH = "month",
   YEAR = "year"
@@ -119,7 +134,7 @@ export default class BusinessImpact extends Vue {
 
   salaryAmount = 50
 
-  salaryPeriod: SalaryPeriod = SalaryPeriod.MONTH
+  salaryPeriod: SalaryPeriod = SalaryPeriod.HOUR
 
   meetingFrequency: MeetingFrequency = MeetingFrequency.WEEKLY
 
@@ -128,7 +143,18 @@ export default class BusinessImpact extends Vue {
   meetingParticipants = 6
 
   public get meetingCost() {
-    return this.salaryAmount * this.meetingParticipants
+    // calculations assume 8 hours a day, 5 days a week, 4 weeks a month, 12 month a year
+    let hourlyRate = this.salaryAmount
+    if (this.salaryPeriod === SalaryPeriod.DAY) hourlyRate /= 8
+    else if (this.salaryPeriod === SalaryPeriod.WEEK) hourlyRate /= 8 * 5
+    else if (this.salaryPeriod === SalaryPeriod.MONTH) hourlyRate /= 8 * 5 * 4
+    else if (this.salaryPeriod === SalaryPeriod.YEAR) hourlyRate /= 8 * 5 * 4 * 12
+
+    let meetingsPerMonth = 1
+    if (this.meetingFrequency === MeetingFrequency.WEEKLY) meetingsPerMonth = 4
+    if (this.meetingFrequency === MeetingFrequency.DAILY) meetingsPerMonth = 5 * 4
+
+    return Math.round(hourlyRate * this.meetingHours * this.meetingParticipants * meetingsPerMonth)
   }
 
   public get salaryCaption() {
@@ -141,3 +167,24 @@ export default class BusinessImpact extends Vue {
   }
 }
 </script>
+
+<style lang="scss">
+
+#hours-adjustment {
+  width: 4em;
+}
+
+input[type="number"] {
+  text-align: right;
+}
+
+.asterisk {
+  font-size: 0.6em;
+  color: lightgrey;
+}
+
+.cost-breakdown {
+  font-size: 0.8rem;
+  color: lightgrey;
+}
+</style>
