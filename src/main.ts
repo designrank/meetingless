@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router/router'
 import store from './store'
 
+import VueClipboards from 'vue-clipboards';
+Vue.use(VueClipboards)
+
 import vClickOutside from 'v-click-outside'
 Vue.use(vClickOutside)
 

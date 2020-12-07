@@ -4,8 +4,22 @@
       <!--  Beginning of the questionnaire    -->
       <article v-if="questionProgress.length === 0" class="beginning">
         <header>
+          <h3>Received an invite to the meeting you don't think should take place?</h3>
+        </header>
+        <section>
+          <p>
+            <button type="button" class="btn btn-primary" v-clipboard="pageUrl">Copy the link</button> to this page and send it to the meeting host
+            so they could check if the meeting is really required, and how to make it more clear to participants if it is.
+          </p>
+        </section>
+        <header>
           <h3>
-            Hi there! Let's check if your
+            Received a link to this page from a concerned participant?
+          </h3>
+        </header>
+        <section>
+          <p>
+            Let's check if your
             <InlineDropdown
                 ref="nameEdit"
                 title="Want to give it a name? Click it!"
@@ -18,12 +32,7 @@
                 Change
               </button>
             </InlineDropdown>
-            is justified
-          </h3>
-        </header>
-        <section>
-          <p>
-            Do you really need to hold it?
+            should take place or the problem could be addressed differently.
           </p>
         </section>
         <footer>
@@ -80,7 +89,8 @@
           {{ latestQuestion.question.meetingOutcome }}
         </section>
         <footer>
-          <button type="button" class="btn btn-primary" @click="$router.push('/')">Go to the main page</button>
+          <button type="button" class="btn btn-primary m-1" @click="$router.push('/meeting-guide')">See how to make the most of it</button>
+          <button type="button" class="btn btn-outline-primary m-1" @click="$router.push('/')">Go to the main page</button>
         </footer>
       </article>
     </template>
@@ -124,6 +134,10 @@ export default class Decision extends Vue {
 
   public get meetingNameWrapper() {
     return this.meetingName ? `meeting "${this.meetingName}"` : "upcoming meeting"
+  }
+
+  public get pageUrl() {
+    return window.location.href
   }
 
   public get latestQuestion(): QuestionStatus {

@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import Landing from '../views/Landing.vue'
 import BusinessImpact from "@/views/BusinessImpact.vue";
 import Decision from "@/views/Decision.vue";
+import MeetingGuide from "@/views/MeetingGuide.vue";
 
 Vue.use(VueRouter)
 
@@ -14,10 +15,15 @@ const routes: Array<RouteConfig> = [
   {
     path: '/business-impact',
     component: BusinessImpact
-  },{
+  },
+  {
     path: '/decision/:settings?',
     component: Decision
   },
+  {
+    path: '/meeting-guide',
+    component: MeetingGuide
+  }
 ]
 
 const router = new VueRouter({
