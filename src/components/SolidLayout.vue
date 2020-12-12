@@ -19,6 +19,7 @@ export default class SolidLayout extends Vue {}
   background: radial-gradient(ellipse at bottom center, #5F2E6E 0%, #2B3A4A 20%);
   background-size: 300% 100%;
   background-position: bottom center;
+  background-attachment: fixed;
   padding: 5rem 10rem !important;
   color: white;
 }

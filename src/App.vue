@@ -1,5 +1,5 @@
 <template>
-  <main id="app" class="container-fluid p-0">
+  <main id="app" class="container-fluid">
     <router-view :key="$route.path"/>
   </main>
 </template>
@@ -9,6 +9,7 @@
 #app {
   font-family: 'Open Sans', sans-serif  !important;
   font-size: 1.3rem;
+  padding: 0
 }
 
 h1, h2, h3, h4, h5, h6 {

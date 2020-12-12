@@ -12,7 +12,7 @@
             so they could check if the meeting is really required, and how to make it more clear to participants if it is.
           </p>
         </section>
-        <header>
+        <header class="pt-5">
           <h3>
             Received a link to this page from a concerned participant?
           </h3>

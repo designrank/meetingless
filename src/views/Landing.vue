@@ -45,6 +45,17 @@
             <GTDTools/>
           </section>
         </article>
+        <article>
+          <header>
+            <h4>Meeting guidelines</h4>
+          </header>
+          <section>
+            <p>
+              Check out our <router-link to="/meeting-guide">productive meeting guide</router-link> for the comprehensive list
+              of key points to help making the essential meetings as productive and meaningful as possible.
+            </p>
+          </section>
+        </article>
       </article>
     </template>
   </SplitLayout>
@@ -52,7 +63,6 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue';
 import SplitLayout from "@/components/SplitLayout.vue";
 import GTDTools from "@/components/GTDTools.vue"; // @ is an alias to /src
 
@@ -60,7 +70,6 @@ import GTDTools from "@/components/GTDTools.vue"; // @ is an alias to /src
   components: {
     GTDTools,
     SplitLayout,
-    HelloWorld,
   },
 })
 export default class Home extends Vue {
