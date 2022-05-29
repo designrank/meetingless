@@ -54,6 +54,9 @@
               Check out our <router-link to="/meeting-guide">productive meeting guide</router-link> for the comprehensive list
               of key points to help making the essential meetings as productive and meaningful as possible.
             </p>
+            <p>
+              Also see the <router-link to="/against-asap">Counter-ASAP manifesto</router-link> to learn how to get rid of the imperative urgency culture.
+            </p>
           </section>
         </article>
       </article>
