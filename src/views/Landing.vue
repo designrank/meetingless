@@ -75,7 +75,7 @@ import GTDTools from "@/components/GTDTools.vue"; // @ is an alias to /src
     SplitLayout,
   },
 })
-export default class Home extends Vue {
+export default class Landing extends Vue {
 }
 </script>
 
