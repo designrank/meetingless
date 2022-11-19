@@ -44,5 +44,14 @@ export const routes = [
 				lastmod: '2022-08-01',
 			}
 		}
+	},
+	{
+		path: '/remote-collaboration',
+		component: () => import("@/views/RemoteCollaboration.vue"),
+		meta: {
+			sitemap: {
+				lastmod: '2022-11-19',
+			}
+		}
 	}
 ];

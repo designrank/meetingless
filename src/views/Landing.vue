@@ -47,16 +47,20 @@
         </article>
         <article>
           <header>
-            <h4>Meeting guidelines</h4>
+            <h4>Ideas and guidelines</h4>
           </header>
           <section>
             <p>
-              Check out our <router-link to="/meeting-guide">productive meeting guide</router-link> for the comprehensive list
+              <router-link to="/meeting-guide">Productive meeting guide</router-link>, a comprehensive list
               of key points to help making the essential meetings as productive and meaningful as possible.
             </p>
             <p>
-              Also see the <router-link to="/against-asap">Counter-ASAP manifesto</router-link> to learn how to get rid of the imperative urgency culture.
+              <router-link to="/against-asap">Counter-ASAP manifesto</router-link>, direction on how to get rid of the imperative urgency culture.
             </p>
+            <p>
+              <router-link to="/remote-collaboration">Remote collaboration ideas</router-link>, a set of tried-and-tested suggestions on how to build a strong remote team.
+            </p>
+
           </section>
         </article>
       </article>
