@@ -3,7 +3,7 @@
     <li class="list-unstyled">
       Async collaborative tools:
       <a href="https://docs.google.com/" target="_blank">Google Docs</a>,
-      <a href="https://figma.com/" target="_blank">Figma</a>
+      <a href="https://figma.com/" target="_blank">Figma</a>,
       <a href="https://miro.com/" target="_blank">Miro</a>
     </li>
     <li>
