@@ -24,4 +24,10 @@ export default class SolidLayout extends Vue {}
   color: white;
 }
 
+@media (max-width: 750px) {
+  .main-side {
+    padding: 2rem 3rem !important;
+  }
+}
+
 </style>
