@@ -28,11 +28,15 @@ export default class SplitLayout extends Vue {}
   background-color: #2B3A4A;
   padding: 10rem 5rem 5rem 5rem !important;
   color: white;
+  overflow-y: scroll;
+  max-height: 100vh;
 }
 
 .bright-side {
   padding: 10rem 2rem 5rem 2rem !important;
   background-color: white;
   color: black;
+  overflow-y: scroll;
+  max-height: 100vh;
 }
 </style>
