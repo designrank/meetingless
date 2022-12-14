@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && vue-cli-service sitemap",
+    "build": "vue-cli-service build",
+    "postbuild": "vue-cli-service sitemap",
     "lint": "vue-cli-service lint",
     "sitemap": "vue-cli-service sitemap"
   },
@@ -37,8 +38,8 @@
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.52.1",
     "sass-loader": "^10.0.5",
-    "typescript": "~3.9.3",
-    "vue-cli-plugin-sitemap": "~2.3.0",
+    "typescript": "^4.6.4",
+    "vue-cli-plugin-sitemap": "^2.3.0",
     "vue-template-compiler": "^2.6.11"
   }
 }

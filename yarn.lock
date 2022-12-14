@@ -8519,10 +8519,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript@~3.9.3:
-  version "3.9.10"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
-  integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
+typescript@^4.6.4:
+  version "4.9.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.4.tgz#a2a3d2756c079abda241d75f149df9d561091e78"
+  integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
 
 uglify-js@3.4.x:
   version "3.4.10"
@@ -8791,7 +8791,7 @@ vue-class-component@^7.1.0, vue-class-component@^7.2.3:
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.2.6.tgz#8471e037b8e4762f5a464686e19e5afc708502e4"
   integrity sha512-+eaQXVrAm/LldalI272PpDe3+i4mPis0ORiMYxF6Ae4hyuCh15W8Idet7wPUEs4N4YptgFHGys4UrgNQOMyO6w==
 
-vue-cli-plugin-sitemap@~2.3.0:
+vue-cli-plugin-sitemap@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-sitemap/-/vue-cli-plugin-sitemap-2.3.0.tgz#92539c1f1992e6ee61a42cb1f4be90fd8eef137e"
   integrity sha512-oZRhYZUdze/wmIaDFkolHCu8MOH/M4B8WW5nx7MhpAJxguia9BYIFnv86d9ZNztCz2Oeat2JC7KLFgfRxSrUtw==
