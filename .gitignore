@@ -25,4 +25,6 @@ designerrank.sublime-project
 designerrank.sublime-workspace
 .idea
 *.js
+!vue.config.js
 *.js.map
+
