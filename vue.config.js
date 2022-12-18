@@ -1,5 +1,5 @@
 const localRequire = require('esm')(module)
-const {routes} = localRequire('./src/router/routes');
+const {routes} = localRequire('./src/router/routes.ts');
 const moment = localRequire('moment');
 
 module.exports = {
