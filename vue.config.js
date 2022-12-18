@@ -1,5 +1,6 @@
-const routes = require('./src/router/sitemap-routes');
-const moment = require('moment');
+const localRequire = require('esm')(module)
+const {routes} = localRequire('./src/router/routes');
+const moment = localRequire('moment');
 
 module.exports = {
 	pluginOptions: {
