@@ -1,9 +1,12 @@
 <template>
-  <section class="whole-page row">
+  <section>
     <PageHeader/>
+
+  <section class="whole-page row">
     <section class="col-12 main-side">
       <slot name="main-side"></slot>
     </section>
+  </section>
   </section>
 </template>
 
@@ -28,13 +31,13 @@ body {
   background-size: 300% 100%;
   background-position: bottom center;
   background-attachment: fixed;
-  padding: 5rem 10rem !important;
+  padding: 5rem 10rem;
   color: white;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 768px) {
   .main-side {
-    padding: 2rem 3rem !important;
+    padding: 2rem 1rem !important;
   }
 }
 

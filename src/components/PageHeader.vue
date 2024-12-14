@@ -16,7 +16,7 @@
 
   .page-header {
     width: 100%;
-    margin: 1em 2em;
+    padding: 1rem 2rem;
     color: white;
 
     a, a:visited {
@@ -26,6 +26,12 @@
     a:hover {
       color: lightgray;
       text-decoration: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .page-header {
+      padding: 1rem !important;
     }
   }
 </style>

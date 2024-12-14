@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <section>
     <PageHeader/>
     <section class="whole-page row" v-on:click="$emit('globalclick', $event.target)">
         <section class="col-7 dark-side">
@@ -9,7 +9,7 @@
           <slot name="bright-side"></slot>
         </section>
     </section>
-  </main>
+  </section>
 </template>
 
 <script lang="ts">
@@ -40,13 +40,13 @@ body {
 
 .dark-side {
   background-color: #2B3A4A;
-  padding: 10rem 5rem 5rem 5rem !important;
+  padding: 10rem 5rem 5rem 5rem;
   color: white;
   border: 0;
 }
 
 .bright-side {
-  padding: 10rem 2rem 5rem 2rem !important;
+  padding: 10rem 2rem 5rem 2rem;
   background-color: white;
   color: black;
 }
@@ -93,16 +93,18 @@ body {
     margin: 0;
   }
 
+  .bright-side, .dark-side {
+    padding: 2rem 1rem !important;
+  }
+
   .dark-side {
     background-color: #2B3A4A;
-    padding: 10rem 5rem 5rem 5rem !important;
     color: white;
     overflow-x: scroll;
     max-width: 100vw;
   }
 
   .bright-side {
-    padding: 10rem 2rem 5rem 2rem !important;
     background-color: white;
     color: black;
     overflow-x: scroll;
