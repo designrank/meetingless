@@ -36,7 +36,7 @@
           </p>
         </section>
         <footer>
-          <button class="btn btn-primary" @click="startProcess">Get started!</button>
+          <button class="btn btn-primary btn-scalable" @click="startProcess">Get started!</button>
         </footer>
       </article>
 
@@ -52,7 +52,7 @@
               v-if="latestQuestion.question.yesAction !== questionAction.NONE"
               type="button"
               :class="[
-                'btn', 'px-4', 'm-2',
+                'btn', 'px-4', 'm-2', 'btn-scalable',
                 noMeetingSelected(latestQuestion.question.yesAction) ? 'btn-light' : 'btn-outline-light'
               ]"
               @click="() => actionClick(latestQuestion.question.yesAction)"
@@ -63,7 +63,7 @@
               v-if="latestQuestion.question.noAction !== questionAction.NONE"
               type="button"
               :class="[
-                'btn', 'px-4', 'm-2',
+                'btn', 'px-4', 'm-2', 'btn-scalable',
                 noMeetingSelected(latestQuestion.question.noAction) ? 'btn-light' : 'btn-outline-light'
               ]"
               @click="() => actionClick(latestQuestion.question.noAction)"
@@ -89,8 +89,8 @@
           {{ latestQuestion.question.meetingOutcome }}
         </section>
         <footer>
-          <button type="button" class="btn btn-primary m-1" @click="$router.push('/meeting-guide')">See how to make the most of it</button>
-          <button type="button" class="btn btn-outline-primary m-1" @click="$router.push('/')">Go to the main page</button>
+          <button type="button" class="btn btn-primary m-1 btn-scalable" @click="$router.push('/meeting-guide')">See how to make the most of it</button>
+          <button type="button" class="btn btn-outline-primary m-1 btn-scalable" @click="$router.push('/')">Go to the main page</button>
         </footer>
       </article>
     </template>
@@ -253,6 +253,12 @@ export default class Decision extends Vue {
 
 .beginning {
   margin-top: 3rem;
+}
+
+.btn-scalable {
+  @media (max-width: 768px) {
+    width: 98%;
+  }
 }
 
 </style>

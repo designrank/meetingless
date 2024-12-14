@@ -84,5 +84,9 @@ export default class Landing extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+  }
+}
 </style>

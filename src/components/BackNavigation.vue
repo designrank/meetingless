@@ -20,5 +20,9 @@
   color: white;
   font-size: 2rem;
   margin: -2rem 2rem 2rem -2rem;
+
+  @media (max-width: 768px) {
+    margin: 0 2rem 2rem 0;
+  }
 }
 </style>
