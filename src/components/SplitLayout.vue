@@ -42,8 +42,6 @@ body {
   background-color: #2B3A4A;
   padding: 10rem 5rem 5rem 5rem !important;
   color: white;
-  overflow-y: scroll;
-  max-height: 100vh;
   border: 0;
 }
 
@@ -51,8 +49,36 @@ body {
   padding: 10rem 2rem 5rem 2rem !important;
   background-color: white;
   color: black;
-  overflow-y: scroll;
-  max-height: 100vh;
+}
+
+@media only screen and (min-width: 768px) {
+  .whole-page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    min-height: 100vh;
+    background-color: white;
+    height: 100%;
+    border: 0;
+    margin: 0;
+  }
+
+  .dark-side {
+    background-color: #2B3A4A;
+    padding: 10rem 5rem 5rem 5rem !important;
+    color: white;
+    overflow-y: scroll;
+    max-height: 100vh;
+    border: 0;
+  }
+
+  .bright-side {
+    padding: 10rem 2rem 5rem 2rem !important;
+    background-color: white;
+    color: black;
+    overflow-y: scroll;
+    max-height: 100vh;
+  }
 }
 
 @media only screen and (max-width: 768px) {
