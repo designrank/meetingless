@@ -97,7 +97,7 @@ export default class SplitLayout extends Vue {}
   }
 
   .bright-side, .dark-side {
-    padding: 2rem 1rem !important;
+    padding: 2rem !important;
   }
 
   .dark-side {
