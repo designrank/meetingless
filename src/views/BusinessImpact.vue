@@ -245,4 +245,15 @@ input[type="number"] {
   color: lightgrey;
 }
 
+.form-row {
+  flex-direction: row;
+
+  @media (max-width: 768px) {
+   flex-direction: column;
+    select, input {
+      margin: 0.5em;
+    }
+  }
+}
+
 </style>
