@@ -8,16 +8,11 @@
 </template>
 
 <style scoped lang="scss">
-  body {
-    background-color: #2B3A4A;
-    border: 0;
-    margin: 0;
-  }
-
-  .page-header {
+ .page-header {
     width: 100%;
     padding: 1rem 2rem;
     color: white;
+    background-color: #2B3A4A;
 
     a, a:visited {
       color: white;

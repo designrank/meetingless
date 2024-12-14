@@ -1,12 +1,9 @@
 <template>
-  <section>
+  <section class="whole-solid-page">
     <PageHeader/>
-
-  <section class="whole-page row">
-    <section class="col-12 main-side">
+    <section class="row main-side">
       <slot name="main-side"></slot>
     </section>
-  </section>
   </section>
 </template>
 
@@ -21,9 +18,13 @@ export default class SolidLayout extends Vue {}
 </script>
 
 <style lang="scss">
-
-body {
+.whole-solid-page {
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: #2B3A4A;
+  border: 0;
+  margin: 0;
 }
 
 .main-side {

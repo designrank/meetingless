@@ -1,13 +1,11 @@
 <template>
-  <section>
+  <section class="whole-page" v-on:click="$emit('globalclick', $event.target)">
     <PageHeader/>
-    <section class="whole-page row" v-on:click="$emit('globalclick', $event.target)">
-        <section class="col-7 dark-side">
-          <slot name="dark-side"></slot>
-        </section>
-        <section class="col-5 bright-side">
-          <slot name="bright-side"></slot>
-        </section>
+    <section class="dark-side">
+      <slot name="dark-side"></slot>
+    </section>
+    <section class="bright-side">
+      <slot name="bright-side"></slot>
     </section>
   </section>
 </template>
@@ -23,14 +21,7 @@ export default class SplitLayout extends Vue {}
 </script>
 
 <style lang="scss">
-body {
-  background-color: #2B3A4A;
-}
-
 .whole-page {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   min-height: 100vh;
   background-color: white;
   height: 100%;
@@ -51,16 +42,26 @@ body {
   color: black;
 }
 
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .whole-page {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-areas:
+      'header header'
+      'left right';
+    grid-template-columns: 60% 40%;
+    grid-template-rows: max-content 1fr;
+    grid-gap: 0;
     min-height: 100vh;
+    max-height: 100vh;
     background-color: white;
-    height: 100%;
+    //height: 100%;
+    width: 100%;
     border: 0;
     margin: 0;
+  }
+
+  .page-header {
+    grid-area: header;
   }
 
   .dark-side {
@@ -68,7 +69,8 @@ body {
     padding: 10rem 5rem 5rem 5rem !important;
     color: white;
     overflow-y: scroll;
-    max-height: 100vh;
+    grid-area: left;
+    //max-height: 100vh;
     border: 0;
   }
 
@@ -77,11 +79,12 @@ body {
     background-color: white;
     color: black;
     overflow-y: scroll;
-    max-height: 100vh;
+    grid-area: right;
+    //max-height: 100vh;
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .whole-page {
     display: flex;
     flex-direction: column;

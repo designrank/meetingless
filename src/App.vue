@@ -6,6 +6,10 @@
 
 <style lang="scss">
 
+body {
+  background-color: #2B3A4A !important;
+}
+
 #app {
   font-family: 'Open Sans', sans-serif  !important;
   font-size: 1.3rem;
